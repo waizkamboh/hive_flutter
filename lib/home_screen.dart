@@ -18,6 +18,38 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
+          FutureBuilder(
+              future: Hive.openBox('waiz'),
+              builder: (context, snapshot){
+                return ListTile(
+                  title: Text(snapshot.data!.get('name').toString()),
+                  subtitle: Text(snapshot.data!.get('age').toString()),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        onPressed: (){
+                          snapshot.data!.put('name', 'waiz kamboh');
+                          setState(() {
+
+                          });
+                        },
+                        icon: Icon(Icons.edit),
+                      ),
+                      IconButton(
+                        onPressed: (){
+                          snapshot.data!.delete('age');
+                          setState(() {
+
+                          });
+                        },
+                        icon: Icon(Icons.delete),
+                      ),
+                    ],
+                  )
+                );
+              }
+          )
 
         ],
       ),
