@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/home_screen.dart';
+import 'package:hive_flutter/models/notes_model.dart';
 import 'package:path_provider/path_provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   var directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
+  Hive.registerAdapter(NotesModelAdapter());
+  Hive.openBox<NotesModel>('notes');
   runApp(const MyApp());
 }
 
