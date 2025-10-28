@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_app/boxes/boxes.dart';
+import 'package:hive_app/models/notes_model.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,31 +25,31 @@ class _HomeScreenState extends State<HomeScreen> {
               future: Hive.openBox('waiz'),
               builder: (context, snapshot){
                 return ListTile(
-                  title: Text(snapshot.data!.get('name').toString()),
-                  subtitle: Text(snapshot.data!.get('age').toString()),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        onPressed: (){
-                          snapshot.data!.put('name', 'waiz kamboh');
-                          setState(() {
+                    title: Text(snapshot.data!.get('name').toString()),
+                    subtitle: Text(snapshot.data!.get('age').toString()),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: (){
+                            snapshot.data!.put('name', 'waiz kamboh');
+                            setState(() {
 
-                          });
-                        },
-                        icon: Icon(Icons.edit),
-                      ),
-                      IconButton(
-                        onPressed: (){
-                          snapshot.data!.delete('age');
-                          setState(() {
+                            });
+                          },
+                          icon: Icon(Icons.edit),
+                        ),
+                        IconButton(
+                          onPressed: (){
+                            snapshot.data!.delete('age');
+                            setState(() {
 
-                          });
-                        },
-                        icon: Icon(Icons.delete),
-                      ),
-                    ],
-                  )
+                            });
+                          },
+                          icon: Icon(Icons.delete),
+                        ),
+                      ],
+                    )
                 );
               }
           )

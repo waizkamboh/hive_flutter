@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/home_screen.dart';
-import 'package:hive_flutter/models/notes_model.dart';
+import 'package:hive_app/notes_screen.dart';
 import 'package:path_provider/path_provider.dart';
+
+import 'home_screen.dart';
+import 'models/notes_model.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   var directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
   Hive.registerAdapter(NotesModelAdapter());
-  Hive.openBox<NotesModel>('notes');
+  await Hive.openBox<NotesModel>('notes');
   runApp(const MyApp());
 }
 
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomeScreen(),
+      home: NotesScreen(),
     );
   }
 }
